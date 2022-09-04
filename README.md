@@ -21,6 +21,7 @@ If you want to go back to the original firmware, you can use the dump provided a
 - A Windows PC running Windows 10 2004 or newer
 - TWRP: https://t.me/TP1803_repo
 - UEFI firmware from [releases](https://github.com/alula/TP1803-Windows-Guide/releases) or compiled from source: https://github.com/edk2-porting/MU-sm8150Pkg
+- TP1803 specific driver package: https://github.com/alula/TP1803-Drivers
 - Files for this guide from the repo: https://github.com/alula/TP1803-Windows-Guide/archive/master.zip
 - ADB/Fastboot tools: https://developer.android.com/studio/releases/platform-tools
 - An ARM64 Windows 10/11 ISO of your choice

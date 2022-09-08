@@ -4,7 +4,7 @@
 
 **⚠️ FIRST, READ THE WHOLE GUIDE BEFORE PROCEEDING ⚠️**
 
-**THIS WILL MODIFY PARTITIONING SCHEME AND WILL ERASE YOUR DATA AND THE ORIGINAL FIRMWARE.**
+**THIS WILL MODIFY PARTITIONING SCHEME AND ERASE YOUR DATA AND THE ORIGINAL FIRMWARE.**
 
 **BACKUP YOUR IMPORTANT DATA AND ANY DEVICE SPECIFIC PARTITIONS (NOTABLY THE PARTITIONS IN LUN5) BEFORE PROCEEDING.**
 
@@ -21,7 +21,8 @@ If you want to go back to the original firmware, you can use the dump provided a
 - A Windows PC running Windows 10 2004 or newer
 - TWRP: https://t.me/TP1803_repo
 - UEFI firmware from [releases](https://github.com/alula/TP1803-Windows-Guide/releases) or compiled from source: https://github.com/edk2-porting/MU-sm8150Pkg
-- TP1803 specific driver package: https://github.com/alula/TP1803-Drivers
+- TP1803 specific driver package: https://github.com/alula/TP1803-Drivers/releases
+- DriverUpdater, to install the driver set: https://github.com/WOA-Project/DriverUpdater/releases/
 - Files for this guide from the repo: https://github.com/alula/TP1803-Windows-Guide/archive/master.zip
 - ADB/Fastboot tools: https://developer.android.com/studio/releases/platform-tools
 - An ARM64 Windows 10/11 ISO of your choice
@@ -48,7 +49,8 @@ If you want to go back to the original firmware, you can use the dump provided a
     Apply the new partitioning scheme to LUN0:
 
     ```bash
-    # THIS WILL ERASE YOUR DATA AND ANDROID FROM THE DEVICE
+    # THIS NUKES THE PARTITION TABLE AND POSSIBLY YOUR DATA
+    # MAKE SURE YOU HAVE A BACKUP OF YOUR DATA BEFORE PROCEEDING
     sgdisk --restore /tmp/windows64G.gpt /dev/block/sda
 
     # Reboot so the kernel can pick up the new partition table
@@ -147,17 +149,16 @@ Windows is now installed but has no drivers.
 
 ## Installing the drivers
 
-Extract the drivers, Extract driver updater, and from the command prompt in the DriverUpdater.exe directory:
+Extract the drivers and run the following command to install them:
 
 ```
 DriverUpdater.exe -d "<path to extracted drivers>\definitions\Desktop\ARM64\Internal\tp1803.txt" -r "<path to extracted drivers>" -p X:\
 ```
 
-Now we want to disable driver signature checks (otherwise Windows will throw a BSOD at boot) and enable the legacy boot manager:
+Now we want to disable driver signature checks (otherwise Windows will throw a BSOD at boot):
 
 ```
 bcdedit /store Y:\EFI\Microsoft\BOOT\BCD /set {default} testsigning on
-bcdedit /store Y:\EFI\Microsoft\BOOT\BCD /set {bootmgr} displaybootmenu yes
 ```
 
 ## Installing the UEFI firmware

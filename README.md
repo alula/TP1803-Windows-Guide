@@ -51,7 +51,7 @@ If you want to go back to the original firmware, you can use the dump provided a
     ```bash
     # THIS NUKES THE PARTITION TABLE AND POSSIBLY YOUR DATA
     # MAKE SURE YOU HAVE A BACKUP OF YOUR DATA BEFORE PROCEEDING
-    sgdisk --restore /tmp/windows64G.gpt /dev/block/sda
+    sgdisk --load-backup /tmp/windows64G.gpt /dev/block/sda
 
     # Reboot so the kernel can pick up the new partition table
     reboot recovery
